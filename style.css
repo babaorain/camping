@@ -1,10 +1,10 @@
 :root {
     /* Color Palette */
-    --primary: #4a6753; /* Deep nature green */
+    --primary: #4a6753;
     --primary-light: #7a9c84;
     --primary-dark: #2c4233;
     
-    --accent: #d4a373; /* Earthy wood/sand */
+    --accent: #d4a373;
     --accent-light: #faedcd;
     
     --bg-main: #fcfdfc;
@@ -207,61 +207,112 @@ body {
     gap: 24px;
 }
 
-/* Companions Group */
-.group {
-    background: var(--bg-main);
-    border: 1px solid var(--border-light);
+/* ===== PREMIUM CARD (帳篷卡片) ===== */
+.premium-card {
+    background: white;
+    border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 16px;
-    transition: box-shadow 0.2s;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
-.group:hover { box-shadow: var(--shadow-sm); border-color: var(--border); }
+.premium-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+    transform: translateY(-4px);
+}
 
-.group-label {
+.premium-card-img {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-alt);
+    padding: 16px 20px;
+}
+
+.premium-card-img img {
+    width: 60%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.premium-card-img img:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+
+.premium-card:hover .premium-card-img img {
+    transform: scale(1.05);
+}
+
+.abso-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-size: 0.85rem;
+    padding: 6px 12px;
+}
+
+.premium-card-body {
+    padding: 18px 20px;
+}
+
+.pc-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 12px;
-    font-weight: 600;
-    font-size: 1.05rem;
     margin-bottom: 12px;
-    color: var(--text-main);
 }
 
-.group-label small {
-    color: var(--text-muted);
-    font-weight: 400;
+.pc-header h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pc-header h3 small {
     font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
 }
 
 .tent-size {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 6px;
-    width: 100%;
-    margin-top: 4px;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    font-weight: 500;
 }
-.tent-size i { opacity: 0.6; }
+.tent-size i { width: 16px; height: 16px; opacity: 0.7; }
 
 .pkg-items {
+    font-size: 0.9rem;
+    color: var(--primary-dark);
+    background: rgba(74, 103, 83, 0.06);
+    padding: 10px 14px;
+    border-radius: 8px;
+    line-height: 1.5;
+    font-weight: 500;
     display: flex;
     align-items: flex-start;
-    gap: 6px;
-    width: 100%;
-    margin-top: 6px;
-    font-size: 0.85rem;
-    color: var(--primary);
-    font-weight: 500;
-    background: rgba(122, 156, 132, 0.1);
-    padding: 6px 10px;
-    border-radius: 6px;
+    gap: 8px;
 }
-.pkg-items i { opacity: 0.8; margin-top: 2px; }
+.pkg-items i { width: 16px; height: 16px; opacity: 0.8; margin-top: 2px; flex-shrink: 0; }
 
 .tag {
     padding: 4px 10px;
@@ -296,19 +347,41 @@ body {
     color: #9a3412;
 }
 
-.group-members {
+.premium-card-footer {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    padding: 14px 20px;
+    background: #FAFAFA;
+    border-top: 1px dashed var(--border-light);
 }
 
-.group-members span {
+.member-pill {
     background: white;
     border: 1px solid var(--border);
     padding: 6px 14px;
     border-radius: 20px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: var(--text-main);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.premium-card.self-provide {
+    background: var(--bg-alt);
+}
+.premium-card.self-provide .pc-header {
+    margin: 18px 20px 0;
+}
+.premium-card.self-provide .premium-card-footer {
+    border-top: none;
+    background: transparent;
+    padding-top: 12px;
+}
+
+.member-pill:hover {
+    border-color: var(--primary-light);
+    color: var(--primary-dark);
 }
 
 .note {
@@ -349,7 +422,55 @@ body {
 }
 .return-note small { display: block; opacity: 0.85; margin-top: 8px; }
 
-/* Packing List */
+/* ===== CAR ARRANGEMENT ===== */
+.car-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.car-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px;
+    background: var(--bg-main);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-main);
+    transition: background 0.2s;
+}
+
+.car-row:nth-child(odd) {
+    background: rgba(74, 103, 83, 0.05);
+}
+
+.car-row:hover {
+    background: rgba(74, 103, 83, 0.1);
+}
+
+.car-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    padding: 4px 10px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.car-row small {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* ===== PACKING LIST ===== */
 .card-packing {
     position: relative;
 }
@@ -392,7 +513,7 @@ body {
     flex-shrink: 0;
 }
 
-/* Itinerary Timeline */
+/* ===== ITINERARY TIMELINE ===== */
 .timeline {
     position: relative;
     padding-left: 20px;
@@ -461,10 +582,9 @@ body {
 .tl div small {
     color: var(--text-light);
     font-size: 0.9rem;
-    display: block;  /* ensures it takes its own line above the image if any */
+    display: block;
 }
 
-/* Timeline specific link and img */
 .tl-nav {
     color: var(--accent);
     background: var(--bg-main);
@@ -481,16 +601,18 @@ body {
 
 .tl-img {
     display: block;
-    width: 140px;
-    height: 90px;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
-    border-radius: 8px;
-    margin-top: 10px;
+    border-radius: 10px;
+    margin-top: 12px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-light);
 }
 
-/* ===== ROW 2: FULL WIDTH SCHEMATIC ===== */
+/* ===== FULL WIDTH SCHEMATIC ===== */
 .card-full {
     height: auto;
 }
@@ -498,7 +620,6 @@ body {
 .scroll-hint-container {
     overflow-x: auto;
     padding-bottom: 12px;
-    /* Custom scrollbar */
 }
 .scroll-hint-container::-webkit-scrollbar {
     height: 8px;
@@ -515,7 +636,6 @@ body {
     background: var(--text-muted); 
 }
 
-/* Schematic Photos */
 .schematic-photos {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -563,10 +683,10 @@ body {
         margin-left: 0; 
         margin-top: 4px; 
         align-self: flex-start; 
-        padding: 6px 12px; /* Bigger touch target */
+        padding: 6px 12px;
     }
     .tl-nav, .nav-link { 
-        padding: 4px 10px; /* Bigger touch target */
+        padding: 4px 10px;
     }
     
     .inline-photo { 
@@ -586,7 +706,6 @@ body {
         margin-bottom: 16px;
     }
 
-    /* Swipe hint for SVG Map */
     .scroll-hint-container::after {
         content: '↔️ 左右滑動可查看完整搭帳示意圖';
         color: var(--text-muted);
